@@ -24,11 +24,17 @@ jobs:
     - name: Build Svelte App
       run: npm run build
 
+    - name: Install ncc
+      run: npm install -g @vercel/ncc
+
+    - name: Bundle Application
+      run: ncc build src/main.js -o dist
+
     - name: Install pkg
       run: npm install -g pkg@5.8.1  # Ensure specific version of pkg is installed
 
     - name: Generate Binary
-      run: pkg ./src/main.js --output my-svelte-app.exe --targets node18-win-x64
+      run: pkg ./dist/main.js --output my-svelte-app.exe --targets node18-win-x64
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
