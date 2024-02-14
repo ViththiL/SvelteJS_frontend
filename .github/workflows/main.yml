@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18' # Adjust to your desired Node.js version
+        node-version: '18' # Use Node.js version 18
 
     - name: Install Dependencies
       run: npm install
@@ -25,7 +25,7 @@ jobs:
       run: npm run build
 
     - name: Install pkg
-      run: npm install -g pkg
+      run: npm install -g pkg@5.8.1  # Ensure specific version of pkg is installed
 
     - name: Generate Binary
       run: pkg ./src/main.js --output my-svelte-app.exe --targets node18-win-x64
