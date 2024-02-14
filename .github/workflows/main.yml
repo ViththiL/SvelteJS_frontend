@@ -19,19 +19,15 @@ jobs:
         node-version: '18' # Use Node.js version 18
 
     - name: Install Dependencies
-      run: npm install
+      run: |
+        npm install
+        npm install -g @vercel/ncc pkg@5.8.1
 
     - name: Build Svelte App
       run: npm run build
 
-    - name: Install ncc
-      run: npm install -g @vercel/ncc
-
     - name: Bundle Application
       run: ncc build src/main.js -o dist
-
-    - name: Install pkg
-      run: npm install -g pkg@5.8.1  # Ensure specific version of pkg is installed
 
     - name: Generate Binary
       run: pkg ./dist/main.js --output my-svelte-app.exe --targets node18-win-x64
@@ -44,4 +40,5 @@ jobs:
         aws-region: 'ap-southeast-1' # Use your AWS region
 
     - name: Upload Binary to S3
-      run: aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/my-svelte-app.exe --acl public-read
+      run: |
+        aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/my-svelte-app.exe --acl public-read
