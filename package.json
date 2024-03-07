@@ -28,6 +28,7 @@
             "node18-win-x64"
         ],
         "outputPath": "./dist",
-        "outputName": "my-svelte-app.exe"
+        "outputName": "my-svelte-app.exe",
+        "assets": ["src/**/*.svelte"]
     }
 }
