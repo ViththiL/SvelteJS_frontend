@@ -6,37 +6,41 @@ on:
       - '**'  # Trigger only on tag pushes
 
 jobs:
-  build-and-upload:
-    runs-on: windows-latest  # Changed to Windows runner
+  build-and-deploy:
+    runs-on: windows-latest
+
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '18' # Change to your desired Node.js version, if necessary
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm cache clean --force
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm install
 
-      - name: Build Binary
+      - name: Build Svelte App
+        run: npm run build
+
+      - name: Install pkg
+        run: npm install -g pkg@5.8.1
+
+      - name: Generate Binary
         run: npm run package
 
-      - name: Configure AWS Credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: your-aws-region # e.g., us-east-1
+          aws-region: 'ap-southeast-1' # Use your AWS region
 
       - name: Upload Binary to S3
-        run: aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/my-svelte-app.exe --acl public-read
-
-
-      # Optional: Archive the binary as a workflow artifact
-      - name: Archive Binary
-        uses: actions/upload-artifact@v2
-        with:
-          name: my-svelte-app
-          path: my-svelte-app.exe
+        run: |
+          aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/my-svelte-app.exe --acl public-read
