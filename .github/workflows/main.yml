@@ -32,8 +32,11 @@ jobs:
 
       - name: Copy Files to Build Directory
         run: |
-          mkdir -p dist
-          cp -R src/* dist/
+          if (!(Test-Path -Path "./dist")) {
+            mkdir "./dist"
+          }
+          Copy-Item -Recurse -Force -Path "./src/*" -Destination "./dist/"
+      
 
       - name: Package Svelte App
         run: npm run package
