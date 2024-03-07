@@ -30,7 +30,7 @@ jobs:
         run: npm run build
 
       - name: Generate Binary
-        run: npm run package
+        run: npm run package --output ./dist/my-svelte-app.exe
 
       - name: List Files in Directory
         run: cmd /c dir /s

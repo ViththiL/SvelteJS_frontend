@@ -23,7 +23,7 @@
         "svelte-navigator": "^3.2.2"
     },
     "pkg": {
-        "scripts": "src/main.js",
+        "scripts": "./src/main.js",
         "targets": [
             "node18-win-x64"
         ],
