@@ -19,26 +19,31 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18' # Change to your desired Node.js version, if necessary
+          node-version: '18.17.1' # Set Node.js version to 18.17
+
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      - name: Remove node_modules
+        run: rmdir /s /q node_modules
+
+      - name: Remove package-lock.json
+        run: del package-lock.json
 
       - name: Install Dependencies
-        run: |
-          npm install
-          npm install -g pkg@5.8.1
+        run: npm install
 
       - name: Build Svelte App
         run: npm run build
+
+      - name: Install pkg
+        run: npm install -g pkg@5.8.1
 
       - name: Generate Binary
         run: npm run package
 
       - name: List Files in Directory
-        run: |
-          ls -R
-          
-      - name: Display Contents of Binary
-        run: |
-          strings ./my-svelte-app.exe
+        run: dir /s
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
