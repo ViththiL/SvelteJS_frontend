@@ -21,8 +21,21 @@ jobs:
       - name: Clear npm cache
         run: npm cache clean --force
 
-      - name: Remove node_modules
-        run: Remove-Item -Path node_modules -Recurse -Force
+      - name: Check if node_modules exists
+        run: |
+          if (Test-Path -Path "node_modules") {
+            Write-Output "node_modules directory exists"
+          } else {
+            Write-Output "node_modules directory does not exist"
+          }
+
+      - name: Remove node_modules if it exists
+        run: |
+          if (Test-Path -Path "node_modules") {
+            Remove-Item -Path "node_modules" -Recurse -Force
+          } else {
+            Write-Output "node_modules directory does not exist. Skipping removal."
+          }
 
       - name: Remove package-lock.json
         run: Remove-Item -Path package-lock.json -Force
