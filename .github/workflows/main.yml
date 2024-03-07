@@ -25,10 +25,10 @@ jobs:
       run: npm run build
 
     - name: Install pkg
-      run: npm install -g pkg@5.8.1  
+      run: npm install -g pkg@5.8.1
 
     - name: Generate Binary
-      run: pkg ./src/main.js --output my-svelte-app.exe --targets node18-win-x64
+      run: npm run package
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
