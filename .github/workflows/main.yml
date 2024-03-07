@@ -30,11 +30,18 @@ jobs:
       - name: Build Svelte App
         run: npm run build
 
+      - name: Copy Files to Build Directory
+        run: |
+          mkdir -p dist
+          cp -R src/* dist/
+
       - name: Package Svelte App
         run: npm run package
 
-      - name: List Files in Directory
-        run: cmd /c dir /s
+      - name: Debug - Print Contents of Dist
+        run: |
+          echo "Contents of dist directory:"
+          ls -R dist
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1

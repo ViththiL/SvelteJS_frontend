@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "package": "pkg ./src/main.js --output ./dist/my-svelte-app.exe --targets node18-win-x64"
+        "package": "pkg ./src/main.js --output ./dist/my-svelte-app.exe --targets node18-win-x64 --assets ./dist/**/*"
     },
     "devDependencies": {
         "@iconify/svelte": "^2.2.1",
@@ -28,7 +28,6 @@
             "node18-win-x64"
         ],
         "outputPath": "./dist",
-        "outputName": "my-svelte-app.exe",
-        "assets": ["src/**/*.svelte"]
+        "outputName": "my-svelte-app.exe"
     }
 }
