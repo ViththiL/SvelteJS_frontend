@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '18' # Adjust the Node.js version as needed
 
       - name: Install Dependencies
         run: |
@@ -30,7 +30,7 @@ jobs:
         run: npm run build
 
       - name: Generate Binary
-        run: npm run package
+        run: npm run package --output ./dist/my-svelte-app.exe
 
       - name: List Files in Directory
         run: cmd /c dir /s
@@ -44,4 +44,4 @@ jobs:
 
       - name: Upload Binary to S3
         run: |
-          aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/my-svelte-app.exe --acl public-read
+          aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/my-svelte-app.exe --acl public-read
