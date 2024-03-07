@@ -24,6 +24,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install pkg
+        run: npm install -g pkg@5.8.1
+
       - name: Build Svelte App
         run: npm run build
 
