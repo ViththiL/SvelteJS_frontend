@@ -18,12 +18,17 @@ jobs:
         with:
           node-version: '18' # Change to your desired Node.js version, if necessary
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      - name: Remove node_modules
+        run: Remove-Item -Path node_modules -Recurse -Force
+
+      - name: Remove package-lock.json
+        run: Remove-Item -Path package-lock.json -Force
+
       - name: Install Dependencies
-        run: |
-          npm cache clean --force
-          rm -rf node_modules
-          rm -f package-lock.json
-          npm install
+        run: npm install
 
       - name: Build Svelte App
         run: npm run build
