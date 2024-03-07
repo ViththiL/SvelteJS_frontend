@@ -36,15 +36,17 @@ jobs:
             mkdir "./dist"
           }
           Copy-Item -Recurse -Force -Path "./src/*" -Destination "./dist/"
-      
 
       - name: Package Svelte App
         run: npm run package
 
-      - name: Debug - Print Contents of Dist
+      - name: Conditional Step
+        if: startsWith(github.ref, 'refs/heads/feature/')
         run: |
-          echo "Contents of dist directory:"
-          ls -R dist
+          # Perform actions specific to feature branches
+
+      - name: List Files in Directory
+        run: cmd /c dir /s
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
