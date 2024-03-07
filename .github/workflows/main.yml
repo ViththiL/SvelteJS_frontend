@@ -34,7 +34,11 @@ jobs:
 
       - name: List Files in Directory
         run: |
-          Get-ChildItem -Path ./ -Recurse | Format-Table -AutoSize
+          ls -R
+          
+      - name: Display Contents of Binary
+        run: |
+          strings ./my-svelte-app.exe
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
