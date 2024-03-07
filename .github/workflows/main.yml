@@ -2,8 +2,11 @@ name: Build and Deploy Svelte App
 
 on:
   push:
-    tags:
-      - '**'  # Trigger only on tag pushes
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
   build-and-deploy:
@@ -18,39 +21,19 @@ jobs:
         with:
           node-version: '18' # Change to your desired Node.js version, if necessary
 
-      - name: Clear npm cache
-        run: npm cache clean --force
-
-      - name: Check if node_modules exists
-        run: |
-          if (Test-Path -Path "node_modules") {
-            Write-Output "node_modules directory exists"
-          } else {
-            Write-Output "node_modules directory does not exist"
-          }
-
-      - name: Remove node_modules if it exists
-        run: |
-          if (Test-Path -Path "node_modules") {
-            Remove-Item -Path "node_modules" -Recurse -Force
-          } else {
-            Write-Output "node_modules directory does not exist. Skipping removal."
-          }
-
-      - name: Remove package-lock.json
-        run: Remove-Item -Path package-lock.json -Force
-
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -g pkg@5.8.1
 
       - name: Build Svelte App
         run: npm run build
 
-      - name: Install pkg
-        run: npm install -g pkg@5.8.1
-
       - name: Generate Binary
         run: npm run package
+
+      - name: List Files in Directory
+        run: dir /s
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -61,4 +44,4 @@ jobs:
 
       - name: Upload Binary to S3
         run: |
-          aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/my-svelte-app.exe --acl public-read
+          aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.sha }}/my-svelte-app.exe --acl public-read
