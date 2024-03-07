@@ -25,10 +25,10 @@ jobs:
         run: npm cache clean --force
 
       - name: Remove node_modules
-        run: rmdir /s /q node_modules
+        run: Remove-Item -Path node_modules -Recurse -Force
 
       - name: Remove package-lock.json
-        run: del package-lock.json
+        run: Remove-Item -Path package-lock.json -Force
 
       - name: Install Dependencies
         run: npm install
