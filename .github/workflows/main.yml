@@ -33,7 +33,8 @@ jobs:
         run: npm run package
 
       - name: List Files in Directory
-        run: dir /s
+        run: |
+          Get-ChildItem -Path ./ -Recurse | Format-Table -AutoSize
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -44,4 +45,4 @@ jobs:
 
       - name: Upload Binary to S3
         run: |
-          aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.sha }}/my-svelte-app.exe --acl public-read
+          aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/my-svelte-app.exe --acl public-read
