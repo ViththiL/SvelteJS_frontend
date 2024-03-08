@@ -11,10 +11,9 @@
     },
     "bin": "./src/main.js",
     "pkg": {
-    "scripts": "./src/main.js",
-    "assets": [
-      "public/**/*"
-    ]
+        "assets": [
+            "public/**/*"
+        ]
     },
     "devDependencies": {
         "@iconify/svelte": "^2.2.1",
