@@ -27,7 +27,6 @@ jobs:
       - name: Build Svelte App
         run: |
           npm run build
-          cat ./dist/build.log || true
           ls -R ./dist
 
       - name: Configure AWS credentials
