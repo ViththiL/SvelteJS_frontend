@@ -8,7 +8,6 @@
         "package": "pkg ./src/main.js --targets node14-win-x64 --output ./dist/my-svelte-app.exe"
     },
     "devDependencies": {
-        "@iconify/svelte": "^2.2.1",
         "@rollup/plugin-commonjs": "^20.0.0",
         "@rollup/plugin-node-resolve": "^13.0.4",
         "rollup": "^2.67.0",
