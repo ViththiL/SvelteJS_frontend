@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "package": "pkg ./src/main.js --targets node14-win-x64 --output ./dist/my-svelte-app.exe"
+        "package": "npx pkg ./src/main.js --targets node14-win-x64 --output ./dist/my-svelte-app.exe"
     },
     "pkg": {
         "assets": [
@@ -17,6 +17,7 @@
     "devDependencies": {
         "@iconify/svelte": "^2.2.1",
         "@sveltejs/vite-plugin-svelte": "^1.0.2",
+        "pkg": "^5.3.0",
         "svelte": "^3.49.0",
         "vite": "^3.1.0"
     },
