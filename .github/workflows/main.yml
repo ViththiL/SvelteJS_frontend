@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Set up Node.js (ensuring Node.js is available)
         uses: actions/setup-node@v2
         with:
           node-version: '14'  # Adjust as needed
@@ -28,7 +28,13 @@ jobs:
         run: npm run build
 
       - name: Package Svelte App (using separate script)
-        run: node ./scripts/package.cjs
+        # Try one of the following options:
+        # Option 1: Using full path to `node` (if necessary)
+        run: ./node ./scripts/package.cjs  # Adjust path if needed
+        # Option 2: Using path added to environment (less recommended)
+        # run: echo "::add-path::$(npm prefix -g)/bin" && node ./scripts/package.cjs
+        # Option 3: Utilize provided Node.js (may require script adjustments)
+        # run: ./scripts/package.cjs
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
