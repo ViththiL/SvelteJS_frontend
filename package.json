@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "vite build && npm run copy-files",
+        "copy-files": "cp -r src public dist",
         "preview": "vite preview",
         "package": "node ./scripts/package.cjs"
     },
