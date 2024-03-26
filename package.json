@@ -9,10 +9,11 @@
         "preview": "vite preview",
         "package": "pkg ./src/main.js --targets node14-win-x64 --output ./dist/my-svelte-app.exe"
     },
-    "bin": "./src/main.js",
     "pkg": {
         "assets": [
-            "public/**/*"
+            "public/**/*",
+            "src/**/*.svelte",
+            "src/main.js"
         ]
     },
     "devDependencies": {
@@ -28,5 +29,4 @@
         "quill": "^1.3.6",
         "svelte-navigator": "^3.2.2"
     }
-  }
-  
+}
