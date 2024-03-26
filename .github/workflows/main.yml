@@ -43,11 +43,11 @@ jobs:
       - name: Upload Binary to S3
         run: aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.sha }}/my-svelte-app.exe --acl public-read
 
-      - name: Download Binary from S3
-        run: aws s3 cp s3://${{ secrets.AWS_BUCKET }}/${{ github.sha }}/my-svelte-app.exe ./my-svelte-app.exe
+      # - name: Download Binary from S3
+      #   run: aws s3 cp s3://${{ secrets.AWS_BUCKET }}/${{ github.sha }}/my-svelte-app.exe ./my-svelte-app.exe
 
-      - name: Make Binary Executable
-        run: chmod +x ./my-svelte-app.exe
+      # - name: Make Binary Executable
+      #   run: chmod +x ./my-svelte-app.exe
 
-      - name: List Files in Directory
-        run: dir /s
+      # - name: List Files in Directory
+      #   run: dir /s
