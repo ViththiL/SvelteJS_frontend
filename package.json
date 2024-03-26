@@ -7,8 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "package": "pkg ./dist/subfolder/main.js --target node18-win-x64 --output ./dist/my-svelte-app.exe",
-        "test": "npm run dev"
+        "package": "pkg ./src/main.js --targets node14-win-x64 --output ./dist/my-svelte-app.exe"
     },
     "bin": "./src/main.js",
     "pkg": {
