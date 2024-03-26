@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "package": "pkg ./dist/main.js --target node14-win-x64 --output ./dist/my-svelte-app.exe","test": "your-test-command" // Replace with your project's test command (if applicable)
+        "package": "pkg ./dist/main.js --target node14-win-x64 --output ./dist/my-svelte-app.exe","test": "your-test-command"
     },
     "bin": "./src/main.js",
     "pkg": {
