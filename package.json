@@ -9,7 +9,6 @@
         "preview": "vite preview",
         "package": "pkg ./src/main.js --targets node14-win-x64 --output ./dist/my-svelte-app.exe"
     },
-    "bin": "./src/main.js",
     "pkg": {
         "assets": [
             "public/**/*"
