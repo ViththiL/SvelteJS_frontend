@@ -7,14 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "package": "npm run build && npx pkg ./src/main.js --output ./dist/my-svelte-app.exe"
-    },
-    "pkg": {
-        "assets": [
-            "public/**/*",
-            "dist/**/*",
-            "src/main.js"
-        ]
+        "package": "npm run build && ncc build src/main.js -o dist && npx pkg ./dist/main.js --output ./dist/my-svelte-app.exe"
     },
     "devDependencies": {
         "@iconify/svelte": "^2.2.1",
