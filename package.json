@@ -10,9 +10,7 @@
         "package": "pkg ./dist/main.js --target node18-win-x64 --output ./dist/my-svelte-app.exe",
         "test": "npm run dev"
     },
-    "bin": {
-        "hrmadminportal": "./dist/main.js"
-    },
+    "bin": "./src/main.js",
     "pkg": {
         "assets": [
             "public/**/*"  
