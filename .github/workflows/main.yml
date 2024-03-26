@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: windows-latest  # Consider using 'ubuntu-latest' if Windows runner issues persist
 
     steps:
       - name: Checkout code
@@ -21,20 +21,20 @@ jobs:
         with:
           node-version: '14'  # Adjust as needed
 
+      - name: Check Node.js Installation
+        run: node -v
+
       - name: Install Dependencies
         run: npm install
 
       - name: Build Svelte App
         run: npm run build
 
+      - name: Grant permissions for execution (if necessary)
+        run: chmod +x ./scripts/package.cjs
+
       - name: Package Svelte App (using separate script)
-        # Try one of the following options:
-        # Option 1: Using full path to `node` (if necessary)
-        run: ./node ./scripts/package.cjs  # Adjust path if needed
-        # Option 2: Using path added to environment (less recommended)
-        # run: echo "::add-path::$(npm prefix -g)/bin" && node ./scripts/package.cjs
-        # Option 3: Utilize provided Node.js (may require script adjustments)
-        # run: ./scripts/package.cjs
+        run: node ./scripts/package.cjs  # Use `node` directly (recommended)
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
