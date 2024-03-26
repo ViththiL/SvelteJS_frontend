@@ -11,7 +11,8 @@
     },
     "pkg": {
         "assets": [
-            "public/**/*"
+            "public/**/*",
+            "dist/**/*"
         ]
     },
     "devDependencies": {
