@@ -7,9 +7,12 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "package": "pkg ./dist/main.js --target node18-win-x64 --output ./dist/my-svelte-app.exe","test": "npm run dev"
+        "package": "pkg ./dist/main.js --target node18-win-x64 --output ./dist/my-svelte-app.exe",
+        "test": "npm run dev"
     },
-    "bin": "./src/main.js",
+    "bin": {
+        "hrmadminportal": "./dist/main.js"
+    },
     "pkg": {
         "assets": [
             "public/**/*"  
