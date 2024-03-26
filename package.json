@@ -12,7 +12,8 @@
     "pkg": {
         "assets": [
             "public/**/*",
-            "dist/**/*"
+            "dist/**/*",
+            "src/main.js"
         ]
     },
     "devDependencies": {
