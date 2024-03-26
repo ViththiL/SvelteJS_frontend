@@ -13,8 +13,8 @@
 
   const profile = JSON.parse(localStorage.getItem("profile"))
   let formData = {
-    username: "test@test.com",
-    password: "test123",
+    username: "",
+    password: "",
   }
   let formError = {
     username: false,
