@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "preview": "vite preview "
+        "preview": "vite preview",
+        "generate-binary": "pkg . --output dist/svelte-binary.exe"
     },
     "devDependencies": {
         "@iconify/svelte": "^2.2.1",

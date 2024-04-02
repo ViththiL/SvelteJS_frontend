@@ -31,27 +31,14 @@ jobs:
       run: npm install -g pkg
 
     - name: Generate Binary
-      run: pkg . --out-path dist/
+      run: pkg . --output dist/svelte-binary.exe
       # This assumes you have a pkg configuration in your package.json or a separate config file
 
     - name: Run Binary
       run: dist/svelte-binary.exe
       # Replace 'dist/svelte-binary.exe' with the path to your binary file
 
-    - name: Configure AWS credentials
-      shell: bash
-      run: |
-        echo "Generating binary..."
-        # Replace the commands below with your actual binary generation steps
-        # For example, if you're using webpack:
-        # webpack --config webpack.config.js
-        # Or if you have a custom script to generate the binary:
-        # npm run generate-binary
-        # Here's a placeholder command:
-        echo "Binary content" > dist\svelte_binary\binary.txt
-
-    - name: Configure AWS credentials
-      shell: bash
+    - name: Configure AWS credentials and Upload Binary to S3
       run: |
         # Configure AWS CLI
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
