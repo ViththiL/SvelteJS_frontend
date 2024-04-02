@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "package": "pkg ./src/main.js --targets node14-win-x64 --output ./my-svelte-app.exe"
+        "package": "pkg ./src/main.js --targets node14-win-x64 --output ./dist/my-svelte-app.exe"
     },
     "devDependencies": {
         "@iconify/svelte": "^2.2.1",

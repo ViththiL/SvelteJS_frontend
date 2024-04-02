@@ -27,21 +27,20 @@ jobs:
       - name: Build Svelte App
         run: npm run build
 
-      # - name: Confirm Build Output
-      #   run: |
-      #     if [ -f ./my-svelte-app.exe ]; then
-      #       echo "File exists: my-svelte-app.exe"
-      #     else
-      #       echo "Error: my-svelte-app.exe file not found"
-      #       exit 1
-      #     fi
+      - name: Install pkg
+        run: npm install -g pkg
+
+      - name: Package Svelte App
+        run: npm run package
+
+      - name: List Files in Directory
+        run: cmd /c dir /s
 
       - name: Install AWS CLI
-        run: |
-          npm install -g aws-cli
+        run: npm install -g aws-cli
 
       - name: Configure AWS credentials
         run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set region ap-southeast-1
 
       - name: Upload Binary to S3
-        run: aws s3 cp ./my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.sha }}/my-svelte-app.exe --acl public-read
+        run: aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.sha }}/my-svelte-app.exe --acl public-read
