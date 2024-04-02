@@ -4,15 +4,17 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
-        "package": "pkg ./src/main.js --output ./my-svelte-app.exe --target node14-win-x64"
+        "build": "rollup -c",
+        "package": "pkg ./src/main.js --targets node14-win-x64 --output ./dist/my-svelte-app.exe"
     },
     "devDependencies": {
         "@iconify/svelte": "^2.2.1",
-        "@sveltejs/vite-plugin-svelte": "^1.0.2",
-        "pkg": "^5.5.1",
+        "@rollup/plugin-commonjs": "^20.0.0",
+        "@rollup/plugin-node-resolve": "^13.0.4",
+        "rollup": "^2.67.0",
+        "rollup-plugin-livereload": "^2.0.0",
+        "rollup-plugin-svelte": "^7.0.0",
+        "rollup-plugin-terser": "^7.0.0",
         "svelte": "^3.49.0",
         "vite": "^3.1.0"
     },
