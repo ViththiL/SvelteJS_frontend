@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "package": "pkg ./src/main.js --output ./hrmadminportal.exe --target node14-win-x64"
+        "package": "pkg ./src/main.js --output ./my-svelte-app.exe --target node14-win-x64"
     },
     "devDependencies": {
         "@iconify/svelte": "^2.2.1",
