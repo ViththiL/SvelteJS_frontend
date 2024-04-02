@@ -9,28 +9,37 @@ on:
       - '**'
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: windows-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
 
-    - name: Install Node.js
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '18' 
 
-    - name: Install dependencies
+    - name: Install Dependencies
       run: npm install
 
-    - name: Build Svelte project
+    - name: Build Svelte App
       run: npm run build
+      # This builds your Svelte app
 
-    - name: Create binary directory
-      run: mkdir dist\svelte_binary
+    - name: Install pkg
+      run: npm install -g pkg
 
-    - name: Generate binary
+    - name: Generate Binary
+      run: pkg . --out-path dist/
+      # This assumes you have a pkg configuration in your package.json or a separate config file
+
+    - name: Run Binary
+      run: dist/svelte-binary.exe
+      # Replace 'dist/svelte-binary.exe' with the path to your binary file
+
+    - name: Configure AWS credentials
+      shell: bash
       run: |
         echo "Generating binary..."
         # Replace the commands below with your actual binary generation steps
@@ -41,9 +50,13 @@ jobs:
         # Here's a placeholder command:
         echo "Binary content" > dist\svelte_binary\binary.txt
 
-    - name: Upload to S3
-      run: aws s3 sync dist\svelte_binary s3://${{ secrets.AWS_BUCKET }}/svelte_binary --delete
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: 'ap-southeast-1'
+    - name: Configure AWS credentials
+      shell: bash
+      run: |
+        # Configure AWS CLI
+        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
+        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws configure set default.region 'ap-southeast-1' # Use your AWS region
+
+        # Upload the binary to Amazon S3
+        aws s3 cp ./dist/svelte-binary.exe s3://${{ secrets.AWS_BUCKET }}/front_end/svelte-binary --acl public-read
