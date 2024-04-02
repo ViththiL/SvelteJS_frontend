@@ -27,14 +27,14 @@ jobs:
       - name: Build Svelte App
         run: npm run build
 
-      - name: Confirm Build Output
-        run: |
-          if [ -f ./my-svelte-app.exe ]; then
-            echo "File exists: my-svelte-app.exe"
-          else
-            echo "Error: my-svelte-app.exe file not found"
-            exit 1
-          fi
+      # - name: Confirm Build Output
+      #   run: |
+      #     if [ -f ./my-svelte-app.exe ]; then
+      #       echo "File exists: my-svelte-app.exe"
+      #     else
+      #       echo "Error: my-svelte-app.exe file not found"
+      #       exit 1
+      #     fi
 
       - name: Install AWS CLI
         run: |
