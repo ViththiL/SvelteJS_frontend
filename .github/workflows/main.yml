@@ -33,6 +33,9 @@ jobs:
       - name: Package Svelte App
         run: npm run package
 
+      - name: Confirm Build Output
+        run: ls -l ./dist/hrmadminportal.exe
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
