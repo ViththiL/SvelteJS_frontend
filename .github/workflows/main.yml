@@ -16,21 +16,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
       - name: Install Dependencies
         run: npm install
 
       - name: Build Application and Generate Binary
-        run: |
-          npm run build
+        run: npm run build
 
       - name: Upload Binary to AWS S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl public-read --follow-symlinks --delete
+        run: |
+          aws s3 sync dist s3://${{ secrets.AWS_BUCKET }}/${{ github.ref }}/dist --acl public-read --delete --region ap-southeast-1
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_BUCKET }}
-          AWS_REGION:  'ap-southeast-1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: "dist" # Adjust to the directory where your binary is generated
-          DEST_DIR: "${{ github.ref }}/dist" # Path to store the binary in S3
