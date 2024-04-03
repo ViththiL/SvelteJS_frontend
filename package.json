@@ -5,7 +5,7 @@
     "type": "commonjs", 
   "scripts": {
       "dev": "vite",
-      "build": "vite build && pkg . -o dist/binary",
+      "build": "vite build && pkg . -o dist/my-svelte-app.exe",
       "preview": "vite preview",
       "start": "node server.js"
   },

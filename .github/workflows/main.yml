@@ -27,9 +27,6 @@ jobs:
       - name: Build Svelte App
         run: npm run build
 
-      - name: Package Svelte App
-        run: npm run build
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -39,4 +36,3 @@ jobs:
 
       - name: Upload Binary to S3
         run: aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.sha }}/my-app.exe --acl public-read
-        
