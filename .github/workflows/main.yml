@@ -41,4 +41,7 @@ jobs:
         run: aws s3 ls s3://${{ secrets.AWS_BUCKET }}/refs/heads/master/dist/
 
       - name: Upload binary to S3
-        run: aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET
+        run: aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/refs/heads/master/dist/my-svelte-app.exe
+
+      - name: Verify binary in S3
+        run: aws s3 ls s3://${{ secrets.AWS_BUCKET }}/refs/heads/master/dist/
