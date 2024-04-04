@@ -22,9 +22,10 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: |
-          npm install
-          npm install vite --save-dev
+        run: npm install
+
+      - name: Install pkg
+        run: npm install pkg --save-dev
 
       - name: Build application
         run: npm run build
