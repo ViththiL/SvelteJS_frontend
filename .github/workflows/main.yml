@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install pkg
-        run: npm install pkg --save-dev
+      - name: Install pkg globally
+        run: npm install -g pkg
 
       - name: Build application
         run: npm run build
