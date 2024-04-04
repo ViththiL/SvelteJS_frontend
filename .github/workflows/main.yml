@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Generate binary
-        run: pkg . -o dist/my-svelte-app.exe
+        run: vite build && pkg . -o dist/my-svelte-app.exe
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@v2
