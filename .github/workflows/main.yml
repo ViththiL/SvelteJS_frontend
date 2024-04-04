@@ -1,4 +1,4 @@
-name: Deploy to AWS
+name: Build and Generate Binary
 
 on:
   push:
@@ -13,19 +13,28 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Node.js
+      - name: Use Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build Application and Generate Binary
+      - name: Build application
         run: npm run build
+
+      - name: Generate binary
+        run: pkg . -o dist/my-svelte-app.exe
+
+      - name: Upload binary artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-svelte-app
+          path: dist/my-svelte-app.exe
 
       - name: Upload Binary to AWS S3
         run: |
