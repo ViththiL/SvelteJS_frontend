@@ -22,13 +22,15 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install vite --save-dev
 
       - name: Build application
         run: npm run build
 
       - name: Generate binary
-        run: vite build && pkg . -o dist/my-svelte-app.exe
+        run: pkg . -o dist/my-svelte-app.exe
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@v2
