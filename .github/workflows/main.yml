@@ -13,10 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Use Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '18'  # Ensure this version is compatible with all dependencies
 
       - name: Install dependencies
         run: npm install
@@ -26,9 +26,11 @@ jobs:
 
       - name: Build application
         run: npm run build
+        # Make sure your build script prepares everything needed for pkg
 
       - name: Generate binary
-        run: pkg . -o dist/my-svelte-app.exe
+        run: pkg . --out-path dist --targets node18-win-x64
+        # Specifying the target explicitly helps ensure compatibility
 
       - name: Upload binary artifact
         uses: actions/upload-artifact@v2
@@ -37,16 +39,12 @@ jobs:
           path: dist/my-svelte-app.exe
 
       - name: Configure AWS credentials
-        shell: bash
-        run: |
-          # Configure AWS CLI
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set default.region 'ap-southeast-1'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-1
 
-          # Extract tag name
-          TAG_NAME=$(echo ${GITHUB_REF##*/})
-          echo "Extracted tag name: $TAG_NAME"
-
-          # Upload the binary to Amazon S3
-          aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/$TAG_NAME/front_end/my-svelte-app --acl public-read
+      - name: Upload binary to AWS S3
+        run: aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref_name }}/front_end/my-svelte-app.exe --acl public-read
+        # Ensure the path and permissions are correctly set
