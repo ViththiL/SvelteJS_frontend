@@ -8,8 +8,16 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "package": "pkg . --targets node14-win-x64 --output ./dist/hrmadminportal-win.exe",
-    "start": "node server.js"
+    "package": "pkg . --out-path ./dist"
+  },
+  "pkg": {
+    "assets": [
+      "dist/**/*"
+    ],
+    "targets": [
+      "node14-win-x64"
+    ],
+    "output": "dist/hrmadminportal-win.exe"
   },
   "devDependencies": {
     "@iconify/svelte": "^2.2.1",
