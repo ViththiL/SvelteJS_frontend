@@ -34,7 +34,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: 'us-east-1'
+        aws-region: 'us-east-1' 
 
     - name: Upload binary to AWS S3
       run: aws s3 cp ./dist/hrmadminportal.exe s3://${{ secrets.AWS_BUCKET }}/${{ github.ref_name }}/front_end/hrmadminportal.exe --acl public-read
