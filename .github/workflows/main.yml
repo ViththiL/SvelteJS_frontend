@@ -10,26 +10,25 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
+    - uses: actions/checkout@v2
+    
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-
+        
     - name: Install dependencies
       run: npm install
-
-    - name: Build Svelte project
+      
+    - name: Build the project
       run: npm run build
-
-    - name: Package application (Windows only)
+      
+    - name: Package the application
       run: npm run package
 
-    - name: List output files
-      run: ls ./dist
-
+    - name: List files in the dist directory
+      run: ls -l ./dist
+      
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -37,5 +36,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: 'us-east-1'
 
-    - name: Upload Windows binary to AWS S3
-      run: aws s3 cp ./dist/hrmadminportal-win.exe s3://${{ secrets.AWS_BUCKET }}/hrmadminportal-win.exe --acl public-read
+    - name: Upload binary to AWS S3
+      run: aws s3 cp ./dist/hrmadminportal.exe s3://${{ secrets.AWS_BUCKET }}/hrmadminportal.exe --acl public-read
+      

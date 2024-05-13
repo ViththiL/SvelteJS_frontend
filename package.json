@@ -17,7 +17,7 @@
     "targets": [
       "node14-win-x64"
     ],
-    "output": "dist/hrmadminportal-win.exe"
+    "output": "dist/hrmadminportal.exe"
   },
   "devDependencies": {
     "@iconify/svelte": "^2.2.1",
