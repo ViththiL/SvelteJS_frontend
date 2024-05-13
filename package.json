@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "package": "pkg . --out-path ./dist",
+    "package": "pkg . --targets node14-win-x64 --output ./dist/hrmadminportal-win.exe",
     "start": "node server.js"
   },
   "devDependencies": {

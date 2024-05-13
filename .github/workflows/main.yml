@@ -1,4 +1,4 @@
-name: Build and Deploy Svelte App
+name: Build and Deploy
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'
+        node-version: '14'
 
     - name: Install dependencies
       run: npm install
@@ -24,7 +24,7 @@ jobs:
     - name: Build Svelte project
       run: npm run build
 
-    - name: Package application
+    - name: Package application (Windows only)
       run: npm run package
 
     - name: List output files
@@ -37,5 +37,5 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: 'us-east-1'
 
-    - name: Upload binary to AWS S3
-      run: aws s3 cp ./dist/my-svelte-app.exe s3://${{ secrets.AWS_BUCKET }}/my-svelte-app.exe --acl public-read
+    - name: Upload Windows binary to AWS S3
+      run: aws s3 cp ./dist/hrmadminportal-win.exe s3://${{ secrets.AWS_BUCKET }}/hrmadminportal-win.exe --acl public-read
